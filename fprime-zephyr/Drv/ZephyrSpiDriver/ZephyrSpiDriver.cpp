@@ -22,6 +22,14 @@ ZephyrSpiDriver ::ZephyrSpiDriver(const char *const compName)
 
 ZephyrSpiDriver ::~ZephyrSpiDriver() {}
 
+void ZephyrSpiDriver ::configure(const struct device *device, spi_config spiConfig) {
+  FW_ASSERT(device != nullptr);
+  // Driver only supports SPI Master mode
+  FW_ASSERT(spiConfig.slave == 0);
+  this->m_device.bus = device;
+  this->m_device.config = spiConfig;
+}
+
 // ----------------------------------------------------------------------
 // Handler implementations for typed input ports
 // ----------------------------------------------------------------------
