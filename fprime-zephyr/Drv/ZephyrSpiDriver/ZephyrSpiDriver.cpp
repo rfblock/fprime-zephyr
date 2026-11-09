@@ -55,7 +55,8 @@ void ZephyrSpiDriver ::SpiReadWrite_handler(FwIndexType portNum,
       .count = 1,
   };
 
-  int status = spi_transceive_dt(&this->m_device, &write_buffer_set, &read_buffer_set); 
+  int status = spi_transceive_dt(&this->m_device, &write_buffer_set, &read_buffer_set);
+  spi_release_dt(&this->m_device);
   if(status <= 0){
     printk("SPI read/write error\n");
   }
